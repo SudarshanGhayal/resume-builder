@@ -64,7 +64,6 @@ const ResumeCreatorForm: React.FC = () => {
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = pdf.internal.pageSize.getHeight();
         // Calculate the number of pages 
-        const imgProps = canvas; const imgWidth = pdfWidth;
         const imgHeight = (canvas.height * pdfWidth) / canvas.width; let heightLeft = imgHeight;
         let position = 0; pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
         heightLeft -= pdfHeight;
