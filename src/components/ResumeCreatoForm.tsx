@@ -63,16 +63,25 @@ const ResumeCreatorForm: React.FC = () => {
         const pdf = new jsPDF("p", "mm", "a4");
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = pdf.internal.pageSize.getHeight();
-        // Calculate the number of pages 
-        const imgHeight = (canvas.height * pdfWidth) / canvas.width; let heightLeft = imgHeight;
-        let position = 0; pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+
+        const imgWidth = pdfWidth;
+        const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
         heightLeft -= pdfHeight;
+
         while (heightLeft > 0) {
-            position = heightLeft - imgHeight; pdf.addPage();
+            position = heightLeft - imgHeight;
+            pdf.addPage();
             pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
             heightLeft -= pdfHeight;
         }
+
         pdf.save(`${data.name.replace(/ /g, "_")}_Resume.pdf`);
+
     };
 
     const renderInput = (key: keyof ResumeData, label: string, isTextArea = false) => (
